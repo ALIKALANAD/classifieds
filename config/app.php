@@ -145,6 +145,16 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /**
+         * Additional Package Service Providers
+         */
+        Collective\Html\HtmlServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
+        Torann\GeoIP\GeoIPServiceProvider::class,
+        Creativeorange\Gravatar\GravatarServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
+        Artesaos\Defender\Providers\DefenderServiceProvider::class,
+
     ],
 
     /*
@@ -193,6 +203,17 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
+
+        /**
+         * Additional Package Aliases
+         */
+        'Form'      => Collective\Html\FormFacade::class,
+        'Html'      => Collective\Html\HtmlFacade::class,
+        'Image'     => Intervention\Image\Facades\Image::class,
+        'GeoIP'     => Torann\GeoIP\GeoIPFacade::class,
+        'Gravatar'  => Creativeorange\Gravatar\Facades\Gravatar::class,
+        'PDF'       => Barryvdh\DomPDF\Facade::class,
+        'Defender'  => Artesaos\Defender\Facades\Defender::class,
 
     ],
 
