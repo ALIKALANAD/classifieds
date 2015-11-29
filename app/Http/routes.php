@@ -11,9 +11,12 @@
 |
 */
 
-Route::get('/', ['middleware' => 'auth', function() {
+/*Route::get('/', ['middleware' => 'auth', function() {
     return view('welcome');
-}]);
+}]);*/
+Route::get('/', function () {
+    return view('welcome');
+});
 
 // authentication routes
 Route::get('auth/login', 'Auth\AuthController@getLogin');
@@ -27,6 +30,13 @@ Route::post('password/email', 'Auth\PasswordController@postEmail');
 // Password reset routes...
 Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
+
+// sub-domain
+Route::group(['domain' => '{city}.classifieds.local'], function () {
+    Route::get('/index', function ($city) {
+        return $city;
+    });
+});
 
 // test route
 Route::get('test', function () {

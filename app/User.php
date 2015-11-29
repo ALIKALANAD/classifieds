@@ -21,22 +21,37 @@ class User extends Model implements AuthenticatableContract,
 
     /**
      * The database table used by the model.
-     *
      * @var string
      */
     protected $table = 'users';
 
     /**
      * The attributes that are mass assignable.
-     *
      * @var array
      */
     protected $fillable = ['username', 'email', 'password'];
 
     /**
      * The attributes excluded from the model's JSON form.
-     *
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    /**
+     * get the user profile
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function user_profile()
+    {
+        return $this->hasOne('App\UserProfile');
+    }
+
+    /**
+     * get the posts for the user
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function posts()
+    {
+        return $this->hasMany('App\Post');
+    }
 }
