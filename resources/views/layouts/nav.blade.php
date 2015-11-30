@@ -12,8 +12,25 @@
 
         <div class="collapse navbar-collapse" id="navbar-menu">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{ url('auth/login') }}"><i class="fa fa-sign-in"></i>&nbsp;Signin</a></li>
-                <li><a href="{{ url('auth/register') }}"><i class="fa fa-user"></i>&nbsp;Signup</a></li>
+
+                @if(Auth::check())
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-user"></i>&nbsp;<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ url('user/posts') }}">Posts</a></li>
+                            <li><a href="{{ url('user/profile') }}">Profile</a></li>
+                            <li><a href="{{ url('user/settings') }}">Settings</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="{{ url('auth/logout') }}"><i class="fa-sign-out"></i>&nbsp;Signout</a></li>
+                @else
+                    <li><a href="{{ url('auth/login') }}"><i class="fa fa-sign-in"></i>&nbsp;Signin</a></li>
+                    <li><a href="{{ url('auth/register') }}"><i class="fa fa-user"></i>&nbsp;Signup</a></li>
+                @endif
+
+
             </ul>
         </div>
     </div>

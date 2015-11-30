@@ -31,6 +31,12 @@ Route::post('password/email', 'Auth\PasswordController@postEmail');
 Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
+// Current user routes
+Route::group(['prefix' => 'user', 'namespace' => 'User', 'middleware' => 'auth'], function () {
+    Route::resource('posts', 'PostController');
+    Route::resource('profile', 'UserProfileController');
+});
+
 // sub-domain
 Route::group(['domain' => '{city}.classifieds.local'], function () {
     Route::get('/index', function ($city) {
