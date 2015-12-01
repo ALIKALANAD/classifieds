@@ -35,6 +35,7 @@ Route::post('password/reset', 'Auth\PasswordController@postReset');
 Route::group(['prefix' => 'user', 'namespace' => 'User', 'middleware' => 'auth'], function () {
     Route::resource('posts', 'PostController');
     Route::resource('profile', 'UserProfileController');
+    Route::resource('settings', 'UserController');
 });
 
 // sub-domain
