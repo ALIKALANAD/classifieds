@@ -14,6 +14,10 @@
             <ul class="nav navbar-nav navbar-right">
 
                 @if(Auth::check())
+                    <li>
+                        <a href="#"><i class="fa fa-plus"></i>&nbsp;New</a>
+                    </li>
+
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-user"></i>&nbsp;<span class="caret"></span>

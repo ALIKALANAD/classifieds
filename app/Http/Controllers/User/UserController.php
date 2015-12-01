@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -18,7 +19,8 @@ class UserController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('user.settings.index', ['user', $user]);
+
+        return view('user.settings.index', ['user'=> $user]);
     }
 
     /**
