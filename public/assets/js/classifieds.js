@@ -1,6 +1,8 @@
 (function(){
 
-    $('#category-filter').metisMenu();
+    $('#category-filter').metisMenu({
+        doubleTapToGo: true,
+    });
     $('#user-posts-table').DataTable();
 
 }());

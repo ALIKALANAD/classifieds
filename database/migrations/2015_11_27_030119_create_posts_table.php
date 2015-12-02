@@ -22,6 +22,7 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->text('content');
             $table->double('price')->default(0.0);
+            $table->timestamp('published_at');
             $table->softDeletes();
             $table->timestamps();
         });

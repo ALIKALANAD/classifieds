@@ -1,27 +1,25 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Home;
 
-use App\User;
-use App\Http\Requests\User\UserRequest;
+use App\Category;
+use App\Post;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
-class UserController extends Controller
+class CategoryController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $user = Auth::user();
-        return view('user.settings.index', ['user'=> $user]);
+//        return view('home.category.show');
     }
 
     /**
@@ -53,7 +51,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $posts = Post::where('category_id', $id)->orderBy('created_at', 'desc')->paginate(config('classifieds.posts_per_page'));
+        return view('home.category.show', ['posts' => $posts]);
     }
 
     /**
@@ -74,12 +73,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $user = Auth::user();
-        $user->password = Hash::make($request->get('new_password'));
-        $user->save();
-        return redirect(route('user.settings.index'))->withSuccess('Account updated!');
+        //
     }
 
     /**

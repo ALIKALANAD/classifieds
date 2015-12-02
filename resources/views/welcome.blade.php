@@ -12,6 +12,7 @@
     <div class="container">
         <div class="content">
             <h1>Laravel 5</h1>
+            {{ Hash::make('password1') }}
         </div>
     </div>
 

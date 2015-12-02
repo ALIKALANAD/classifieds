@@ -15,8 +15,10 @@
     return view('welcome');
 }]);*/
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
+Route::resource('category', 'Home\CategoryController');
+Route::resource('category.post', 'Home\PostController');
 
 // authentication routes
 Route::get('auth/login', 'Auth\AuthController@getLogin');

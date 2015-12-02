@@ -145,6 +145,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /** System */
+        App\Providers\ValidatorServiceProvider::class,
+
         /**
          * Additional Package Service Providers
          */

@@ -18,6 +18,10 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('layouts.partials.categories', function ($view) {
             $view->with('categories', Category::where('parent_id', 0)->get());
         });
+
+        view()->composer('index', function ($view) {
+            $view->with('categories', Category::where('parent_id', 0)->get());
+        });
     }
 
     /**
