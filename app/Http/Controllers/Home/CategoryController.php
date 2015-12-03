@@ -51,7 +51,7 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $posts = Post::where('category_id', $id)->orderBy('created_at', 'desc')->paginate(config('classifieds.posts_per_page'));
+//        $posts = Post::where('category_id', $id)->orderBy('created_at', 'desc')->paginate(config('classifieds.posts_per_page'));
         return view('home.category.show', ['posts' => $posts]);
     }
 
