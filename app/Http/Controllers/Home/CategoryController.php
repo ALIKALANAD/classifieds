@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Home;
 
 use App\Category;
 use App\Post;
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -19,7 +20,20 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-//        return view('home.category.show');
+        if (!$request->has('search')) {
+            return redirect(route('category.show', [0]));
+        }
+
+        $value = $request->get('search');
+
+//        $posts = Post::where('title', $request->get('search'))->orderBy('created_at', 'desc')->paginate(config('classifieds.posts_per_page'));
+        $posts = Post::where(function ($query) use ($value) {
+            $query->orWhere('id', $value);
+            $query->orWhere('content', 'LIKE', '%' . $value . '%');
+
+        })->whereNull('deleted_at')->orderBy('created_at', 'desc')->paginate(config('classifieds.posts_per_page'));
+
+        return view('home.category.show', ['posts' => $posts]);
     }
 
     /**
@@ -52,6 +66,14 @@ class CategoryController extends Controller
     public function show($id)
     {
 //        $posts = Post::where('category_id', $id)->orderBy('created_at', 'desc')->paginate(config('classifieds.posts_per_page'));
+
+        $posts = Post::whereIn('category_id', function($query) use ($id) {
+            $query->select('id')
+                ->from(with(new Category())->getTable())
+                ->where('parent_id', $id);
+            $query->orWhere('category_id', $id);
+        })->whereNull('deleted_at')->orderBy('created_at', 'desc')->paginate(config('classifieds.posts_per_page'));
+
         return view('home.category.show', ['posts' => $posts]);
     }
 

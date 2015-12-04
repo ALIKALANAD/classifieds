@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Home;
 
+use App\Post;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -46,9 +47,10 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($cat_id, $id)
     {
-        return view('home.post.show');
+        $post = Post::find($id);
+        return view('home.post.show', ['post' => $post]);
     }
 
     /**

@@ -30,8 +30,8 @@ $factory->define(App\Category::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Post::class, function (Faker\Generator $faker) {
     return [
-        'category_id' => mt_rand(1, 50),
-        'user_id' => mt_rand(1, 2),
+        'category_id' => mt_rand(1, 100),
+        'user_id' => mt_rand(1, 10),
         'title' => $faker->words(4, true),
         'content' => join("\n\n", $faker->paragraphs(mt_rand(6, 20))),
         'created_at' => $faker->dateTimeBetween('-1 month', '+3 days'),
@@ -42,5 +42,19 @@ $factory->define(App\PostImage::class, function (Faker\Generator $faker) {
     return [
         'post_id' => $faker->randomElement(App\Post::all()->lists('id')->toArray()),
         'path' => $faker->imageUrl($width = 640, $height = 480, 'cats', true),
+    ];
+});
+
+$factory->define(App\State::class, function (Faker\Generator $faker) {
+    return [
+        'state' => $faker->state,
+        'state_abbr' => $faker->stateAbbr,
+    ];
+});
+
+$factory->define(App\City::class, function (Faker\Generator $faker) {
+    return [
+        'state_id' => mt_rand(1, 5),
+        'city' => $faker->city,
     ];
 });

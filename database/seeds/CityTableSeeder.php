@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class PostTableSeeder extends Seeder
+class CityTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class PostTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Post::class, 400)->create();
+        factory(App\City::class, 20)->create();
     }
 }

@@ -1,7 +1,7 @@
 (function(){
 
-    $('#category-filter').metisMenu({
-        doubleTapToGo: true,
+    $('#category-filter, #states-filter').metisMenu({
+        doubleTapToGo: false,
     });
     $('#user-posts-table').DataTable();
 

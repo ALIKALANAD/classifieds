@@ -7,42 +7,49 @@
         <div class="row">
 
             <div class="col-md-3">
+
+                {!! Form::open(['url' => route('category.index'), 'method' => 'GET', 'class' => 'form-horizontal']) !!}
+                    <div class="input-group">
+
+
+                        {!! Form::text('search', Request::get('search'), ['class' => 'form-control']) !!}
+
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </span>
+                    </div>
+                {!! Form::close() !!}
+                <br>
+
                 <div class="panel panel-default">
-                    <div class="panel-heading">All Categories</div>
                     <div class="panel-body">
-                        @include('layouts.partials.categories')
+                        <p>
+                            sub-categories
+                        </p>
                     </div>
                 </div>
+
+                @include('layouts.partials.categories')
+
+                @include('layouts.partials.states')
 
             </div>
 
-            <div class="col-md-7">
+            <div class="col-md-9">
 
-
-                {!! Form::open(['url' => '', 'class' => 'form-inline']) !!}
-
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-addon">$</div>
-                        {!! Form::text('search', null, ['class' => 'form-control']) !!}
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Search</button>
-
-                {!! Form::close() !!}
-
-
-                @if(!empty($posts))
+                @if(count($posts) > 0)
 
                     @foreach($posts as $post)
                         <div class="panel panel-default">
                             <div class="panel-body">
 
                                 <a href="{{ route('category.post.show', [$post->category->id, $post->id]) }}">{{ $post->title }}</a>
-                                <br>
+                                &raquo;
+                                {{ $post->user->username }}
+                                &raquo;
                                 {{ $post->created_at->diffForHumans() }}
                                 <br>
-                                {{ $post->user->username }}
+                                {!! link_to_route('category.show', $post->category->id . '&nbsp;&raquo;&nbsp;' . $post->category->name, [$post->category->id]) !!}
 
                             </div>
                         </div>
@@ -50,16 +57,18 @@
 
                     {!! $posts->render() !!}
 
+                @else
+                    <h4 style="text-align: center;">No Available Ads</h4>
                 @endif
 
 
             </div>
 
-            <div class="col-md-2">
-                <div class="well">
-                    &nbsp;
-                </div>
-            </div>
+            {{--<div class="col-md-2">--}}
+                {{--<div class="well">--}}
+                    {{--&nbsp;--}}
+                {{--</div>--}}
+            {{--</div>--}}
 
         </div>
 
