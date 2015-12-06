@@ -12,6 +12,8 @@
 
             <div class="panel-body">
 
+                @include('home.post._modal')
+
                 @if(count($post) > 0)
                     <h2>{{ $post->title }} &nbsp;&raquo;&nbsp; $ {{ $post->price }}</h2>
                     <h5>
@@ -22,7 +24,7 @@
 
                     <div class="images">
                         @if(!empty($post->images->toArray()))
-                            <ol>
+                            <ol id="images">
                             @foreach($post->images as $image)
                                 <li><img src="{{ asset($image->path) }}" alt="{{ $image->title }}" class="img-thumbnail"></li>
                             @endforeach
@@ -45,4 +47,32 @@
 
     </div>
 
+@endsection
+
+@section('scripts')
+    <script>
+        $('#images .img-thumbnail').each(function(i) {
+            var item = $('<div class="item"></div>');
+            var itemDiv = $(this).parents('li');
+            var title = $(this).attr('alt');
+
+            item.attr('title', title);
+            $(itemDiv.html()).appendTo(item);
+            item.appendTo('.carousel-inner');
+
+            if (i == 0) {
+                item.addClass('active');
+            }
+        });
+        $('#modal-carousel-images').carousel({ interval:false });
+        $('#modal-carousel-images').on('slid.bs.carousel', function() {
+            $('.modal-title').html($(this).find('.active').attr('title'));
+        });
+        $('#images .img-thumbnail').click(function() {
+            var idx = $(this).parents('li').index();
+            var id = parseInt(idx);
+            $('#modal-images').modal('show');
+            $('#modal-carousel-images').carousel(id);
+        });
+    </script>
 @endsection

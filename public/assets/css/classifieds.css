@@ -3,14 +3,18 @@
     padding: 0;
     list-style-type: none;
 }
-
 .images ol li{
     display: inline;
     height: 65px;
     width: 65px;
 }
-
+.images ol li img {
+    cursor: pointer;
+}
 .images ol li img {
     height: inherit;
     width: inherit;
+}
+.carousel-control.right, .carousel-control.left {
+    background-image: none !important;
 }
