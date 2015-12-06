@@ -157,6 +157,7 @@ return [
         Creativeorange\Gravatar\GravatarServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Artesaos\Defender\Providers\DefenderServiceProvider::class,
+        DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
 
     ],
 
@@ -217,6 +218,7 @@ return [
         'Gravatar'  => Creativeorange\Gravatar\Facades\Gravatar::class,
         'PDF'       => Barryvdh\DomPDF\Facade::class,
         'Defender'  => Artesaos\Defender\Facades\Defender::class,
+        'Breadcrumbs'   => DaveJamesMiller\Breadcrumbs\Facade::class,
 
     ],
 

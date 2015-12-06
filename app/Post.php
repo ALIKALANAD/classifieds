@@ -54,4 +54,9 @@ class Post extends Model
     {
         return $this->hasMany('App\PostImage');
     }
+
+    public function hasImages()
+    {
+        return !empty($this->images->toArray());
+    }
 }

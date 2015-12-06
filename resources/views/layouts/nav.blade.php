@@ -7,7 +7,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="{{ url('/') }}" class="navbar-brand">Classifieds</a>
+            <a href="{{ url('/') }}" class="navbar-brand">{{ config('classifieds.title') }}</a>
         </div>
 
         <div class="collapse navbar-collapse" id="navbar-menu">
@@ -15,7 +15,7 @@
 
                 @if(Auth::check())
                     <li>
-                        <a href="#"><i class="fa fa-plus"></i>&nbsp;New</a>
+                        <a href="{{ route('select.category.create') }}"><i class="fa fa-plus"></i>&nbsp;New</a>
                     </li>
 
                     <li class="dropdown">

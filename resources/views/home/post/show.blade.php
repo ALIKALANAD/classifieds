@@ -3,6 +3,10 @@
 @section('content')
 
     <div class="container">
+        {!! Breadcrumbs::render('post', $post->category, $post) !!}
+    </div>
+
+    <div class="container">
 
         <div class="panel panel-default">
 
@@ -15,6 +19,16 @@
                         {{ $post->user->username }} &nbsp;&raquo;&nbsp;
                         {!! link_to_route('category.show', $post->category->name, [$post->category->id]) !!}
                     </h5>
+
+                    <div class="images">
+                        @if(!empty($post->images->toArray()))
+                            <ol>
+                            @foreach($post->images as $image)
+                                <li><img src="{{ asset($image->path) }}" alt="{{ $image->title }}" class="img-thumbnail"></li>
+                            @endforeach
+                            </ol>
+                        @endif
+                    </div>
 
                     <p>
                         {!! nl2br(e($post->content)) !!}

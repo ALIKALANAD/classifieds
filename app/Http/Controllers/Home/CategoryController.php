@@ -25,6 +25,7 @@ class CategoryController extends Controller
         }
 
         $value = $request->get('search');
+        $category = new Category();
 
 //        $posts = Post::where('title', $request->get('search'))->orderBy('created_at', 'desc')->paginate(config('classifieds.posts_per_page'));
         $posts = Post::where(function ($query) use ($value) {
@@ -33,7 +34,7 @@ class CategoryController extends Controller
 
         })->whereNull('deleted_at')->orderBy('created_at', 'desc')->paginate(config('classifieds.posts_per_page'));
 
-        return view('home.category.show', ['posts' => $posts]);
+        return view('home.category.show', ['posts' => $posts, 'category' => $category]);
     }
 
     /**
@@ -43,7 +44,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::where('parent_id', 0)->get();
+        return view('home.category.create', ['categories' => $categories]);
     }
 
     /**
@@ -67,14 +69,20 @@ class CategoryController extends Controller
     {
 //        $posts = Post::where('category_id', $id)->orderBy('created_at', 'desc')->paginate(config('classifieds.posts_per_page'));
 
-        $posts = Post::whereIn('category_id', function($query) use ($id) {
-            $query->select('id')
-                ->from(with(new Category())->getTable())
-                ->where('parent_id', $id);
-            $query->orWhere('category_id', $id);
-        })->whereNull('deleted_at')->orderBy('created_at', 'desc')->paginate(config('classifieds.posts_per_page'));
+        if ($id == 0) {
+            $posts = Post::whereNull('deleted_at')->orderBy('created_at', 'desc')->paginate(config('classifieds.posts_per_page'));
+            $category = null;
+        } else {
+            $category = Category::find($id);
+            $posts = Post::whereIn('category_id', function($query) use ($id) {
+                //$query->orWhere('category_id', $id);
+                $query->select('id')
+                    ->from(with(new Category())->getTable())
+                    ->where('parent_id', $id);
+            })->orWhere('category_id', $id)->whereNull('deleted_at')->orderBy('created_at', 'desc')->paginate(config('classifieds.posts_per_page'));
+        }
 
-        return view('home.category.show', ['posts' => $posts]);
+        return view('home.category.show', ['posts' => $posts, 'category' => $category]);
     }
 
     /**

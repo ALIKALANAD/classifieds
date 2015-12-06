@@ -17,8 +17,14 @@
 Route::get('/', function () {
     return view('index');
 });
-Route::resource('category', 'Home\CategoryController');
-Route::resource('category.post', 'Home\PostController');
+Route::resource('category', 'Home\CategoryController', ['only' => ['index', 'show']]);
+Route::resource('category.post', 'Home\PostController', ['only' => ['show']]);
+
+// protected resource routes
+Route::group(['prefix' => 'select', 'middleware' => 'auth'], function () {
+    Route::resource('category', 'Home\CategoryController', ['only' => ['create']]);
+    Route::resource('category.post', 'Home\PostController', ['only' => ['create', 'store']]);
+});
 
 // authentication routes
 Route::get('auth/login', 'Auth\AuthController@getLogin');

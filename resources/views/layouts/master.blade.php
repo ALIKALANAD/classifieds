@@ -15,6 +15,7 @@
 
     <link rel="stylesheet" href="{{ asset('assets/css/traydes.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/dataTables.fontAwesome.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/classifieds.css') }}">
     <style>
         body {
             font-family: 'Raleway';

@@ -2,6 +2,12 @@
 
 @section('content')
 
+    @if(isset($category))
+        <div class="container">
+            {!! Breadcrumbs::render('category', $category) !!}
+        </div>
+    @endif
+
     <div class="container">
 
         <div class="row">
@@ -37,11 +43,21 @@
 
             <div class="col-md-9">
 
+                @include('common.success')
+
                 @if(count($posts) > 0)
 
                     @foreach($posts as $post)
                         <div class="panel panel-default">
                             <div class="panel-body">
+
+                                <span class="label label-info">
+                                    @if($post->hasImages())
+                                        Has Image
+                                    @else
+                                        No Image
+                                    @endif
+                                </span>&nbsp;&nbsp;
 
                                 <a href="{{ route('category.post.show', [$post->category->id, $post->id]) }}">{{ $post->title }}</a>
                                 &raquo;
@@ -55,7 +71,11 @@
                         </div>
                     @endforeach
 
-                    {!! $posts->render() !!}
+                        @if(Request::has('search'))
+                            {!! $posts->appends(['search' => Request::get('search')])->render() !!}
+                        @else
+                            {!! $posts->render() !!}
+                        @endif
 
                 @else
                     <h4 style="text-align: center;">No Available Ads</h4>
