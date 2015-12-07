@@ -17,7 +17,7 @@
                     @endforeach
                 @else
 
-                    {!! Form::open(['url' => route('select.category.post.store', [$category->id]), 'files' => true]) !!}
+                    {!! Form::open(['url' => route('select.category.post.store', [$category->id]), 'files' => true, 'enctype' => 'multipart/form-data']) !!}
 
                     {!! Form::text('title', null, ['placeholder' => 'Title']) !!}
                     <br>
