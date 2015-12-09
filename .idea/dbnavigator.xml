@@ -16,6 +16,7 @@
       <scope value="GLOBAL" />
       <destination value="FILE" />
       <format value="EXCEL" />
+      <charset value="windows-1252" />
     </export-instructions>
   </component>
   <component name="DBNavigator.Project.DatabaseBrowserManager">
@@ -64,6 +65,7 @@
           <database value="mysql" />
           <url-type value="DATABASE" />
           <os-authentication value="false" />
+          <empty-password value="false" />
           <user value="root" />
           <password value="cm9vdA==" />
         </database>

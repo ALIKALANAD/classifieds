@@ -25,9 +25,20 @@
                         </span>
                     </div>
                     <div class="input-group">
-                        <a href="#">Advanced Search</a>
-                        <div class="options">
-
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> has image
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> search titles only
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> posted today
+                            </label>
                         </div>
                     </div>
                 {!! Form::close() !!}
@@ -49,7 +60,7 @@
 
                 {{--@include('layouts.partials.categories')--}}
 
-                @include('layouts.partials.states')
+                {{--@include('layouts.partials.states')--}}
 
             </div>
 
@@ -85,7 +96,7 @@
                                 <td><img src="@if($post->hasImages()) {{ $post->images->first()->path }} @else {{ asset(config('classifieds.no-image')) }} @endif" alt="" style="height: 60px; width: 60px;"></td>
                                 <td><a class="title" href="{{ route('category.post.show', [$post->category->id, $post->id]) }}">{{ $post->title }}</a></td>
                                 <td><a class="username" href="#">{{ $post->user->username }}</a></td>
-                                <td><span class="date-published">{{ $post->created_at->diffForHumans() }}</span></td>
+                                <td><a class="date-published" href="#" data-toggle="tooltip" title="{{ $post->created_at->toDayDateTimeString() }}">{{ $post->created_at->diffForHumans() }}</a></td>
                                 <td>{!! link_to_route('category.show', $post->category->id . '&nbsp;&raquo;&nbsp;' . $post->category->name, [$post->category->id], ['class' => 'category']) !!}</td>
                             </tr>
                         @endforeach
@@ -115,4 +126,10 @@
 
     </div>
 
+@endsection
+
+@section('scripts')
+    <script>
+        $('[data-toggle="tooltip"]').tooltip();
+    </script>
 @endsection
