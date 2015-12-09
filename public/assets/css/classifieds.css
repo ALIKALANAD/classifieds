@@ -18,3 +18,19 @@
 .carousel-control.right, .carousel-control.left {
     background-image: none !important;
 }
+
+.post-image {
+    display: inline-block;
+
+}
+
+.post-image a {
+    height: 60px;
+    width: 60px;
+    display: inline;
+}
+
+.post-image a img {
+    height: inherit;
+    width: inherit;
+}

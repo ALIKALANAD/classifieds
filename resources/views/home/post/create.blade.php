@@ -10,11 +10,13 @@
                 @include('common.errors')
 
                 @if(!empty($category->sub_categories->toArray()))
+
                     <legend>Select Category</legend>
                     @foreach($category->sub_categories as $category)
                         <a href="{{ route('select.category.post.create', $category->id) }}">{{ $category->name }}</a>
                         &nbsp;&nbsp;&nbsp;
                     @endforeach
+
                 @else
 
                     {!! Form::open(['url' => route('select.category.post.store', [$category->id]), 'files' => true, 'enctype' => 'multipart/form-data']) !!}
@@ -32,7 +34,6 @@
                     {!! Form::close() !!}
 
                 @endif
-
 
             </div>
         </div>
