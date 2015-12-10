@@ -34,3 +34,11 @@
     height: inherit;
     width: inherit;
 }
+
+#posts span.price {
+    font-weight: bold;
+    font-size: 16px;
+    border: 1px solid #bbb;
+    padding: 2px 4px 2px 4px;
+    border-radius: 2px;
+}

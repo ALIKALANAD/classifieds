@@ -19,7 +19,7 @@
 
 
                         {!! Form::text('search', Request::get('search'), ['class' => 'form-control']) !!}
-
+                        {!! Form::hidden('cat-id', $category->id) !!}
                         <span class="input-group-btn">
                             <button type="submit" class="btn btn-primary">Search</button>
                         </span>
@@ -27,36 +27,50 @@
                     <div class="input-group">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> has image
+                                <input type="checkbox" name="hasImg" value="1" @if(Request::has('hasImg')) checked @endif> has image
                             </label>
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> search titles only
+                                <input type="checkbox" name="onlyTitle" value="1" @if(Request::has('onlyTitle')) checked @endif> search titles only
                             </label>
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> posted today
+                                <input type="checkbox" name="today" value="1" @if(Request::has('today')) checked @endif> posted today
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="user" value="1" @if(Request::has('user')) checked @endif> with username
                             </label>
                         </div>
                     </div>
                 {!! Form::close() !!}
                 <br>
 
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        @if(!empty($category->sub_categories->toArray()))
+
+                @if(!empty($category->sub_categories->toArray()))
+                    <div class="panel panel-default">
+                        <div class="panel-body">
                             <ul>
                                 @foreach($category->sub_categories as $sub)
                                     <li><a href="{{ route('category.show', [$sub->id]) }}">{{ $sub->name }}</a></li>
                                 @endforeach
                             </ul>
-                        @else
-                            {!! link_to_route('category.show', 'Back', [$category->parent_category->id]) !!}
-                        @endif
+                        </div>
                     </div>
-                </div>
+                @else
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            @if(isset($category))
+                                {{--{!! link_to_route('category.show', 'Back', [$category->parent_category->id]) !!}--}}
+                                <a href="{{ route('category.show', $category->parent_category->id) }}">Back</a>
+                            @endif
+                        </div>
+                    </div>
+                @endif
+
 
                 {{--@include('layouts.partials.categories')--}}
 
@@ -89,20 +103,27 @@
                         {{--</div>--}}
                     {{--@endforeach--}}
 
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" id="posts">
                         <tbody>
                         @foreach($posts as $post)
                             <tr>
-                                <td><img src="@if($post->hasImages()) {{ $post->images->first()->path }} @else {{ asset(config('classifieds.no-image')) }} @endif" alt="" style="height: 60px; width: 60px;"></td>
-                                <td><a class="title" href="{{ route('category.post.show', [$post->category->id, $post->id]) }}">{{ $post->title }}</a></td>
+                                <td>
+                                    <img src="@if($post->hasImages()) {{ $post->images->first()->path }} @else {{ asset(config('classifieds.no-image')) }} @endif" alt="" style="height: 60px; width: 60px;">
+                                </td>
+                                <td>
+                                    <span class="price">$&nbsp;{{ number_format($post->price, 2) }}</span>
+                                    <a class="title" href="{{ route('category.post.show', [$post->category->id, $post->id]) }}">{{ $post->title }}</a>
+                                    <p class="hidden-sm hidden-xs">
+                                        {{ str_limit($post->content, 50) }}
+                                    </p>
+                                </td>
                                 <td><a class="username" href="#">{{ $post->user->username }}</a></td>
                                 <td><a class="date-published" href="#" data-toggle="tooltip" title="{{ $post->created_at->toDayDateTimeString() }}">{{ $post->created_at->diffForHumans() }}</a></td>
-                                <td>{!! link_to_route('category.show', $post->category->id . '&nbsp;&raquo;&nbsp;' . $post->category->name, [$post->category->id], ['class' => 'category']) !!}</td>
+                                <td class="hidden-xs">{!! link_to_route('category.show', $post->category->id . '&nbsp;&raquo;&nbsp;' . $post->category->name, [$post->category->id], ['class' => 'category']) !!}</td>
                             </tr>
                         @endforeach
                         </tbody>
                     </table>
-
                         @if(Request::has('search'))
                             {!! $posts->appends(['search' => Request::get('search')])->render() !!}
                         @else

@@ -21,11 +21,13 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         if (!$request->has('search')) {
-            return redirect(route('category.show', [0]));
+            // return redirect(route('category.show', [0]));
+            return redirect()->back();
         }
+        $cat_id = $request->get('cat-id');
 
         $value = $request->get('search');
-        $category = new Category();
+        $category = Category::find($cat_id);
 
 //        $posts = Post::where('title', $request->get('search'))->orderBy('created_at', 'desc')->paginate(config('classifieds.posts_per_page'));
         $posts = Post::where(function ($query) use ($value) {

@@ -41,6 +41,8 @@
 
     @yield('content')
 
+    @include('layouts.footer')
+
     <script src="{{ asset('assets/js/traydes.js') }}"></script>
     <script src="{{ asset('assets/js/classifieds.js') }}"></script>
     @yield('scripts')

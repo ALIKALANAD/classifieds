@@ -17,7 +17,7 @@
                 @if(count($post) > 0)
                     <h2>{{ $post->title }} &nbsp;&raquo;&nbsp; $ {{ $post->price }}</h2>
                     <h5>
-                        {{ $post->created_at->diffForHumans() }} &nbsp;&raquo;&nbsp;
+                        <a href="#" data-toggle="tooltip" title="{{ $post->created_at->toDayDateTimeString() }}">{{ $post->created_at->diffForHumans() }}</a> &nbsp;&raquo;&nbsp;
                         {{ $post->user->username }} &nbsp;&raquo;&nbsp;
                         {!! link_to_route('category.show', $post->category->name, [$post->category->id]) !!}
                     </h5>
@@ -51,6 +51,8 @@
 
 @section('scripts')
     <script>
+        $('[data-toggle="tooltip"]').tooltip();
+
         $('#images .img-thumbnail').each(function(i) {
             var item = $('<div class="item"></div>');
             var itemDiv = $(this).parents('li');
