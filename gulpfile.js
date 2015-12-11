@@ -28,6 +28,9 @@ gulp.task("copyfiles", function() {
     gulp.src("vendor/bower_dl/metisMenu/dist/metisMenu.css").pipe(rename('metisMenu.less')).pipe(gulp.dest("resources/assets/less/others/"));
     // add goup
     gulp.src("vendor/bower_dl/jquery-goup/src/jquery.goup.js").pipe(gulp.dest("resources/assets/js"));
+    // add parsley
+    gulp.src("vendor/bower_dl/parsleyjs/dist/parsley.js").pipe(gulp.dest("resources/assets/js"));
+    gulp.src("vendor/bower_dl/parsleyjs/dist/parsley.remote.js").pipe(gulp.dest("resources/assets/js"));
 
     /**
      * copy datatables
@@ -68,7 +71,9 @@ elixir(function(mix) {
         'js/jquery.dataTables.js',
         'js/dataTables.bootstrap.js',
             'js/metisMenu.js',
-            'js/jquery.goup.js'
+            'js/jquery.goup.js',
+            'js/parsley.js',
+            'js/parsley.remote.js',
     ],
         'public/assets/js/traydes.js',
         'resources/assets'
