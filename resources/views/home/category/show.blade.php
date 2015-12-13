@@ -17,7 +17,6 @@
                 {!! Form::open(['url' => route('category.index'), 'method' => 'GET', 'class' => 'form-horizontal']) !!}
                     <div class="input-group">
 
-
                         {!! Form::text('search', Request::get('search'), ['class' => 'form-control']) !!}
                         {!! Form::hidden('cat-id', $category->id) !!}
                         <span class="input-group-btn">
@@ -49,13 +48,17 @@
                 {!! Form::close() !!}
                 <br>
 
-
                 @if(!empty($category->sub_categories->toArray()))
                     <div class="panel panel-default">
+                        <div class="panel-heading">Categories</div>
                         <div class="panel-body">
-                            <ul>
+                            <ul class="list">
                                 @foreach($category->sub_categories as $sub)
-                                    <li><a href="{{ route('category.show', [$sub->id]) }}">{{ $sub->name }}</a></li>
+                                    <li>
+                                        <a href="{{ route('category.show', [$sub->id]) }}">
+                                            <i class="fa fa-angle-right"></i>{{ $sub->name }}
+                                        </a>
+                                    </li>
                                 @endforeach
                             </ul>
                         </div>
@@ -72,9 +75,9 @@
                 @endif
 
 
-                {{--@include('layouts.partials.categories')--}}
+                @include('layouts.partials.categories')
 
-                {{--@include('layouts.partials.states')--}}
+                @include('layouts.partials.states')
 
             </div>
 

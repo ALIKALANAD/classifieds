@@ -21,7 +21,7 @@
                         */
                     ?>
 
-                    <legend>User Sign in</legend>
+                    <legend>Traydes Sign in</legend>
 
                     @include('common.errors')
 

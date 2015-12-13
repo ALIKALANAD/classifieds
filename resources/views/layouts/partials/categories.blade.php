@@ -4,7 +4,7 @@
         <div class="panel-heading">All Categories</div>
         <div class="panel-body">
 
-            <ul class="metismenu" id="category-filter">
+            <ul class="metismenu list" id="category-filter">
 
                 @foreach($categories as $category)
                     <li>

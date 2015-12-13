@@ -28,6 +28,16 @@
                             <li><a href="{{ url('user/settings') }}">Settings</a></li>
                         </ul>
                     </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-lock"></i>&nbsp;<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Posts</a></li>
+                        </ul>
+                    </li>
+
                     <li><a href="{{ url('auth/logout') }}"><i class="fa-sign-out"></i>&nbsp;Signout</a></li>
                 @else
                     <li><a href="{{ url('auth/login') }}"><i class="fa fa-sign-in"></i>&nbsp;Signin</a></li>

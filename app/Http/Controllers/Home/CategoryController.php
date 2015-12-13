@@ -20,7 +20,7 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        if (!$request->has('search')) {
+        if (!$request->has('search') && !$request->has('hasImg') && !$request->has('onlyTitle') && !$request->has('today') && !$request->has('user')) {
             // return redirect(route('category.show', [0]));
             return redirect()->back();
         }
@@ -33,7 +33,6 @@ class CategoryController extends Controller
         $posts = Post::where(function ($query) use ($value) {
             $query->orWhere('id', $value);
             $query->orWhere('content', 'LIKE', '%' . $value . '%');
-
         })->whereNull('deleted_at')->orderBy('created_at', 'desc')->paginate(config('classifieds.posts_per_page'));
 
         return view('home.category.show', ['posts' => $posts, 'category' => $category]);
@@ -81,7 +80,15 @@ class CategoryController extends Controller
                 $query->select('id')
                     ->from(with(new Category())->getTable())
                     ->where('parent_id', $id);
-            })->orWhere('category_id', $id)->whereNull('deleted_at')->orderBy('created_at', 'desc')->paginate(config('classifieds.posts_per_page'));
+            })->orWhere('category_id', $id)
+                ->whereNull('deleted_at')
+
+//                use for selecting posts with images only
+//                ->join('post_images', 'posts.id', '=', 'post_images.post_id')
+//                ->select('posts.*')
+
+                ->orderBy('created_at', 'desc')
+                ->paginate(config('classifieds.posts_per_page'));
         }
 
         return view('home.category.show', ['posts' => $posts, 'category' => $category]);

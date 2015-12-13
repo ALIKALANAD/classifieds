@@ -5,7 +5,7 @@
         <div class="panel-heading">All States</div>
         <div class="panel-body">
 
-            <ul class="metismenu" id="states-filter">
+            <ul class="metismenu list" id="states-filter">
 
                 @foreach($states as $state)
                     <li>
