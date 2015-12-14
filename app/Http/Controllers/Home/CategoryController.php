@@ -30,7 +30,7 @@ class CategoryController extends Controller
         $category = Category::find($cat_id);
 
 //        $posts = Post::where('title', $request->get('search'))->orderBy('created_at', 'desc')->paginate(config('classifieds.posts_per_page'));
-        $posts = Post::where(function ($query) use ($value) {
+        $posts = Post::where(function ($query) use ($value, $cat_id) {
             $query->orWhere('id', $value);
             $query->orWhere('content', 'LIKE', '%' . $value . '%');
         })->whereNull('deleted_at')->orderBy('created_at', 'desc')->paginate(config('classifieds.posts_per_page'));

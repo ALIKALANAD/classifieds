@@ -25,10 +25,10 @@ class CreatePostRequest extends Request
     public function rules()
     {
         return [
-            /*'title' => 'required',
+            'title' => 'required',
             'content' => 'required',
             'price' => 'required',
-            'images' => 'required',*/
+            'images' => 'required',
         ];
     }
 }

@@ -1,3 +1,4 @@
+/* post images */
 .images ol {
     display: inline-block;
     padding: 0;
@@ -18,23 +19,20 @@
 .carousel-control.right, .carousel-control.left {
     background-image: none !important;
 }
-
+/* post */
 .post-image {
     display: inline-block;
 
 }
-
 .post-image a {
     height: 60px;
     width: 60px;
     display: inline;
 }
-
 .post-image a img {
     height: inherit;
     width: inherit;
 }
-
 #posts span.price {
     font-weight: bold;
     font-size: 16px;
@@ -49,4 +47,28 @@
 }
 .list li i {
     padding-right: 10px;
+}
+/* home page list categories */
+.lists .category > a.title {
+    font-size: 16px;
+    font-weight: bold;
+}
+.lists .category > .categories {
+    list-style: none;
+    display: block;
+    padding: 0;
+}
+.lists .category > .categories li {
+    display: inline-block;
+}
+.lists .categories > li+li:before {
+    content: '/';
+    padding: 0 2px;
+    color: #337ab7;
+}
+.lists .category {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
 }

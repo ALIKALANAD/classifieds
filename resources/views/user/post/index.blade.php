@@ -36,9 +36,11 @@
                                         <td>
                                             <a href="#">{{ $post->title }}</a>
                                         </td>
-                                        <td>{{ $post->created_at->diffForHumans() }} <span class="label label-info">{{ $post->created_at }}</span></td>
+                                        <td><a href="#" data-toggle="tooltip" title="{{ $post->created_at->toDayDateTimeString() }}">{{ $post->created_at->diffForHumans() }}</a></td>
                                         <td>
-                                            <a href="#"><i class="fa fa-edit"></i></a>
+                                            <a href="#" data-toggle="tooltip" title="Edit this Ad"><i class="fa fa-edit"></i></a>
+                                            <a href="#" data-toggle="tooltip" title="Unpublish this Ad"><i class="fa fa-remove"></i></a>
+                                            <a href="#" data-toggle="tooltip" title="Remove this Ad"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
 
@@ -49,12 +51,16 @@
 
 
                 </div>
-
             </div>
-
         </div>
-
     </div>
 
 @endsection
 
+@section('scripts')
+    <script>
+        $('#user-posts-table').DataTable({
+//            "pageLength": 25,
+        });
+    </script>
+@endsection

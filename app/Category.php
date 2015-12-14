@@ -29,6 +29,22 @@ class Category extends Model
     }
 
     /**
+     * count the total number of posts
+     * @return mixed
+     */
+    public function count_total_posts()
+    {
+        $id = $this->id;
+        return Post::whereIn('category_id', function ($query) use ($id) {
+            $query->select('id')
+                ->from($this->getTable())
+                ->where('parent_id', $id);
+        })->orWhere('category_id', $id)
+            ->whereNull('deleted_at')
+            ->count();
+    }
+
+    /**
      * getting all the posts for the category
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

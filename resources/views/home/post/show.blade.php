@@ -51,7 +51,7 @@
 
 @section('scripts')
     <script>
-        $('[data-toggle="tooltip"]').tooltip();
+//        $('[data-toggle="tooltip"]').tooltip();
 
         $('#images .img-thumbnail').each(function(i) {
             var item = $('<div class="item"></div>');

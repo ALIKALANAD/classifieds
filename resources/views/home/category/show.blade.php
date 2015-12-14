@@ -75,9 +75,9 @@
                 @endif
 
 
-                @include('layouts.partials.categories')
+                {{--@include('layouts.partials.categories')--}}
 
-                @include('layouts.partials.states')
+                {{--@include('layouts.partials.states')--}}
 
             </div>
 
@@ -122,7 +122,7 @@
                                 </td>
                                 <td><a class="username" href="#">{{ $post->user->username }}</a></td>
                                 <td><a class="date-published" href="#" data-toggle="tooltip" title="{{ $post->created_at->toDayDateTimeString() }}">{{ $post->created_at->diffForHumans() }}</a></td>
-                                <td class="hidden-xs">{!! link_to_route('category.show', $post->category->id . '&nbsp;&raquo;&nbsp;' . $post->category->name, [$post->category->id], ['class' => 'category']) !!}</td>
+                                <td class="hidden-xs">{!! link_to_route('category.show', $post->category->name, [$post->category->id], ['class' => 'category']) !!}</td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -134,7 +134,7 @@
                         @endif
 
                 @else
-                    <h4 style="text-align: center;">No Available Ads</h4>
+                    <h4 style="text-align: center;">no available ads @if(Request::has('search')) for value "{{ Request::get('search') }}" @endif</h4>
                 @endif
 
 
@@ -154,6 +154,6 @@
 
 @section('scripts')
     <script>
-        $('[data-toggle="tooltip"]').tooltip();
+//        $('[data-toggle="tooltip"]').tooltip();
     </script>
 @endsection

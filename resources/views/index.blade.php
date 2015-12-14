@@ -4,15 +4,15 @@
 
     <div class="container">
 
-        <div class="css-table">
+        <div class="lists">
             @if(!empty($categories))
 
                 @foreach($categories as $category)
-                    <div class="col">
-                        <a href="{{ route('category.show', [$category->id]) }}">{{ $category->name }}</a>
+                    <div class="category">
+                        <a class="title" href="{{ route('category.show', [$category->id]) }}" data-toggle="tooltip" title="{{ $category->count_total_posts() }} ads available">{{ $category->name }}</a>
 
                         @if(!empty($category->sub_categories->toArray()))
-                            <ol>
+                            <ol class="categories">
                                 @foreach($category->sub_categories as $sub)
                                     <li>
                                         <a href="{{ route('category.show', [$sub->id]) }}">{{ $sub->name }}</a>

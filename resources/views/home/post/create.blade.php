@@ -21,7 +21,7 @@
 
                     {!! Form::open(['url' => route('select.category.post.store', [$category->id]), 'files' => true, 'enctype' => 'multipart/form-data']) !!}
 
-                    {!! Form::text('title', null, ['placeholder' => 'Title']) !!}
+                    {!! Form::text('title', null, ['placeholder' => 'title']) !!}
                     <br>
                     {!! Form::text('price', 0, ['placeholder' => 'Price']) !!}
                     <br>
