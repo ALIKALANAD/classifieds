@@ -44,6 +44,11 @@ class Category extends Model
             ->count();
     }
 
+    public function count_posts()
+    {
+        return $this->posts()->count();
+    }
+
     /**
      * getting all the posts for the category
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

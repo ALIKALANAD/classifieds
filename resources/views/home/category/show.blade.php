@@ -57,6 +57,9 @@
                                     <li>
                                         <a href="{{ route('category.show', [$sub->id]) }}">
                                             <i class="fa fa-angle-right"></i>{{ $sub->name }}
+                                            <span class="pull-right">
+                                                ({{ $sub->count_total_posts() }})
+                                            </span>
                                         </a>
                                     </li>
                                 @endforeach
