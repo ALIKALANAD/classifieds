@@ -10,10 +10,14 @@
                 <legend>Select Category</legend>
 
                 @if(!empty($categories))
-                    @foreach($categories as $category)
-                        <a href="{{ route('select.category.post.create', $category->id) }}">{{ $category->name }}</a>
-                        &nbsp;&nbsp;&nbsp;
-                    @endforeach
+                    <ol class="categories">
+                        @foreach($categories as $category)
+                            <li>
+                                <a href="{{ route('select.category.post.create', $category->id) }}">{{ $category->name }}</a>
+                            </li>
+                        @endforeach
+                    </ol>
+
                 @endif
 
             </div>

@@ -39,7 +39,7 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                {!! Form::submit('Submit', array('class' => 'btn primary')) !!}
+                                {!! Form::submit('Submit', array('class' => 'btn success')) !!}
                             </div>
                         </div>
 

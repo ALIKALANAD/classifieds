@@ -11,6 +11,7 @@
                     <legend>Forgot Password</legend>
 
                     @include('common.errors')
+                    @include('common.success')
 
                     {!! Form::open(['url' => '/password/email', 'method' => 'post', 'class' => 'form-horizontal', 'role' => 'form']) !!}
                         {!! csrf_field() !!}
@@ -24,7 +25,7 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                {!! Form::submit('Submit', ['class' => 'btn btn-primary']) !!}
+                                {!! Form::submit('Submit', ['class' => 'btn btn-success']) !!}
                             </div>
                         </div>
 

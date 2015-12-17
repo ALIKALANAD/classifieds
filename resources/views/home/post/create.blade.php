@@ -12,24 +12,52 @@
                 @if(!empty($category->sub_categories->toArray()))
 
                     <legend>Select Category</legend>
-                    @foreach($category->sub_categories as $category)
-                        <a href="{{ route('select.category.post.create', $category->id) }}">{{ $category->name }}</a>
-                        &nbsp;&nbsp;&nbsp;
-                    @endforeach
+
+                    <ol class="categories">
+                        @foreach($category->sub_categories as $category)
+                            <li>
+                                <a href="{{ route('select.category.post.create', $category->id) }}">{{ $category->name }}</a>
+                            </li>
+                        @endforeach
+                    </ol>
 
                 @else
 
-                    {!! Form::open(['url' => route('select.category.post.store', [$category->id]), 'files' => true, 'enctype' => 'multipart/form-data']) !!}
+                    {!! Form::open(['url' => route('select.category.post.store', [$category->id]), 'files' => true, 'enctype' => 'multipart/form-data', 'class' => 'form-horizontal', 'role' => 'form']) !!}
 
-                    {!! Form::text('title', null, ['placeholder' => 'title']) !!}
-                    <br>
-                    {!! Form::text('price', 0, ['placeholder' => 'Price']) !!}
-                    <br>
-                    {!! Form::file('images[]', array('multiple' => true, 'accept' => 'image/*')) !!}
-                    <br>
-                    {!! Form::textarea('content', null, ['placeholder' => 'content']) !!}
-                    <br>
-                    {!! Form::submit('Submit') !!}
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Title</label>
+                        <div class="col-md-6">
+                            {!! Form::text('title', null, ['placeholder' => 'title', 'class' => 'form-control']) !!}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Price (USD)</label>
+                        <div class="col-md-6">
+                            {!! Form::text('price', 0, ['placeholder' => 'Price', 'class' => 'form-control']) !!}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Image/s</label>
+                        <div class="col-md-6">
+                            {!! Form::file('images[]', array('multiple' => true, 'accept' => 'image/*')) !!}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Description</label>
+                        <div class="col-md-6">
+                            {!! Form::textarea('content', null, ['placeholder' => 'content', 'class' => 'form-control']) !!}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-6 col-md-offset-4">
+                            {!! Form::submit('Submit', ['class' => 'btn btn-success']) !!}
+                        </div>
+                    </div>
 
                     {!! Form::close() !!}
 
